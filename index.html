@@ -1,416 +1,187 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BEYBLADE X ZUKAN</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111827">
+<title>BEYBLADE X ZUKAN | ベイブレードX図鑑</title>
 <style>
-:root {
-  --main:#e53935;
-  --bg:#101116;
-  --card:#1d2029;
-  --text:#fff;
-  --sub:#aeb4c2;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,"Noto Sans JP",sans-serif;
-}
-header {
-  padding:24px 16px 18px;
-  text-align:center;
-  background:linear-gradient(135deg,var(--main),#171923);
-}
-header h1 {
-  margin:0;
-  font-size:28px;
-  letter-spacing:2px;
-}
-header p { color:#eee; margin:8px 0 0; }
-.controls {
-  padding:14px;
-  display:grid;
-  gap:10px;
-  max-width:900px;
-  margin:auto;
-}
-input,select,button {
-  font:inherit;
-  border-radius:10px;
-  padding:12px;
-  border:1px solid #414653;
-}
-input,select {
-  background:#252936;
-  color:white;
-  min-width:0;
-}
-button {
-  cursor:pointer;
-  background:var(--main);
-  color:white;
-  border:0;
-  font-weight:bold;
-}
-.themes {
-  display:flex;
-  gap:8px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-.theme {
-  width:34px;
-  height:34px;
-  padding:0;
-  border:2px solid white;
-  border-radius:50%;
-}
-#count {
-  text-align:center;
-  color:var(--sub);
-  padding:4px;
-}
-.grid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:12px;
-  padding:12px;
-  max-width:1000px;
-  margin:auto;
-}
-.bey {
-  background:var(--card);
-  border:1px solid #343a49;
-  border-radius:14px;
-  padding:10px;
-  cursor:pointer;
-  min-width:0;
-}
-.bey:active { transform:scale(.98); }
-.card-image {
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:contain;
-  background:#11141b;
-  border-radius:10px;
-}
-.placeholder {
-  width:100%;
-  aspect-ratio:1/1;
-  background:#11141b;
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#929aaa;
-  font-size:13px;
-  text-align:center;
-}
-.bey h3 {
-  margin:10px 0 5px;
-  font-size:15px;
-}
-.small-stats {
-  color:var(--sub);
-  font-size:12px;
-  line-height:1.7;
-}
-.modal {
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:10;
-  background:#000c;
-  overflow-y:auto;
-  padding:18px 10px;
-}
-.modal-content {
-  background:#202430;
-  border:1px solid #454b5a;
-  border-radius:16px;
-  padding:16px;
-  max-width:520px;
-  margin:20px auto;
-}
-.detail-image {
-  width:100%;
-  max-height:300px;
-  object-fit:contain;
-  background:#11141b;
-  border-radius:12px;
-}
-.detail-placeholder {
-  min-height:180px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:#929aaa;
-  background:#11141b;
-  border-radius:12px;
-}
-.modal h2 { margin:12px 0; }
-.part-info {
-  color:var(--sub);
-  line-height:1.8;
-  font-size:14px;
-}
-.stat {
-  margin:15px 0;
-}
-.stat-top {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-}
-.stat input[type=number] {
-  width:76px;
-  padding:7px;
-}
-.stat input[type=range] {
-  width:100%;
-  accent-color:var(--main);
-  padding:0;
-}
-.actions {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:18px;
-}
-.close {
-  background:#555d6e;
-}
-.note {
-  color:var(--sub);
-  font-size:12px;
-  line-height:1.6;
-}
-@media(min-width:650px) {
-  .grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
-  .controls { grid-template-columns:2fr 1fr 1fr; }
-}
+:root{--accent:#f97316;--bg:#0b1020;--panel:#141c2e;--panel2:#1c2940;--text:#f4f7fb;--muted:#9ba9bd;--line:#2b3850;--good:#22c55e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#1b2a45 0,var(--bg) 42%);color:var(--text);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN",Meiryo,sans-serif;min-height:100vh}
+header{padding:22px 16px 14px;max-width:1200px;margin:auto}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:linear-gradient(135deg,var(--accent),#facc15);display:grid;place-items:center;color:#101827;font-size:24px;font-weight:1000;box-shadow:0 8px 24px #0006}.eyebrow{color:var(--accent);font-size:11px;font-weight:900;letter-spacing:.18em}.brand h1{font-size:clamp(21px,5vw,32px);margin:2px 0 0;letter-spacing:.04em}.sub{color:var(--muted);font-size:13px;margin:12px 0 0;line-height:1.6}
+main{max-width:1200px;margin:auto;padding:0 16px 50px}.toolbar{background:#111a2bdc;border:1px solid var(--line);border-radius:18px;padding:13px;position:sticky;top:8px;z-index:5;backdrop-filter:blur(14px);box-shadow:0 10px 28px #0004}.tabs{display:flex;gap:7px;overflow:auto;padding-bottom:10px}.tab,.chip,button{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:12px;padding:10px 13px;font-weight:750;cursor:pointer;white-space:nowrap}.tab.active,.chip.active{background:var(--accent);border-color:var(--accent);color:#111827}.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}.controls input,.controls select{min-width:0;width:100%;background:#0c1424;border:1px solid var(--line);border-radius:11px;color:var(--text);padding:11px;font-size:14px}.controls input{grid-column:1/-1}.chips{display:flex;gap:7px;overflow:auto;margin-top:10px;padding-bottom:2px}.chip{font-size:12px;padding:7px 10px}.meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:18px 2px 12px;color:var(--muted);font-size:13px}.meta strong{color:var(--text)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.card{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:linear-gradient(150deg,#19243a,#111827);cursor:pointer;transition:transform .15s,border-color .15s}.card:active{transform:scale(.98)}.thumb{height:140px;background:radial-gradient(circle,#293a56,#101827 70%);display:grid;place-items:center;position:relative}.thumb img{width:100%;height:100%;object-fit:contain;padding:9px}.noimg{width:90px;height:90px;border:2px dashed #52627a;border-radius:50%;display:grid;place-items:center;color:#9aa9bd;font-size:12px;text-align:center;line-height:1.4}.tag{position:absolute;left:8px;top:8px;background:#0b1222d9;border:1px solid #52627a;border-radius:8px;padding:4px 7px;font-size:10px;color:#dbe5f2}.cardbody{padding:11px}.card h3{font-size:14px;margin:0 0 5px;line-height:1.4}.card p{font-size:11px;color:var(--muted);margin:0;line-height:1.5}.card .series{color:var(--accent);font-weight:900}.empty{border:1px dashed var(--line);border-radius:16px;padding:28px;text-align:center;color:var(--muted);grid-column:1/-1}.sectionTitle{font-size:18px;margin:22px 0 12px}.toolsList{display:grid;grid-template-columns:1fr;gap:10px}.toolcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px}.toolcard h3{margin:0 0 5px;font-size:15px}.toolcard p{margin:0;color:var(--muted);font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#050914df;z-index:20;padding:14px;overflow:auto}.modal.show{display:grid;place-items:center}.dialog{width:min(720px,100%);background:#121c2e;border:1px solid #40506b;border-radius:22px;overflow:hidden;box-shadow:0 20px 70px #0009}.modalhead{display:flex;justify-content:space-between;align-items:center;padding:14px 17px;border-bottom:1px solid var(--line)}.modalhead h2{font-size:18px;margin:0}.close{font-size:20px;padding:6px 11px}.detail{display:grid;grid-template-columns:1fr;gap:14px;padding:16px}.hero{min-height:210px;border-radius:16px;background:radial-gradient(circle,#2b3b57,#0b1322 72%);display:grid;place-items:center;overflow:hidden}.hero img{max-width:100%;max-height:270px;object-fit:contain}.info h3{margin:0 0 6px;font-size:22px}.muted{color:var(--muted);font-size:13px;line-height:1.6}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stat{background:#0b1425;border:1px solid var(--line);padding:10px;border-radius:12px}.stat label{display:flex;justify-content:space-between;font-size:12px;color:#cbd5e1}.stat input[type=number]{width:54px;background:#1b2940;border:1px solid var(--line);color:white;border-radius:7px;padding:4px}.stat input[type=range]{width:100%;accent-color:var(--accent);margin:10px 0 0}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.actions button{font-size:12px}.primary{background:var(--accent);color:#111827;border-color:var(--accent)}.filelabel{display:inline-flex;align-items:center;background:#24344e;border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:12px;font-weight:750;cursor:pointer}.filelabel input{display:none}.note{background:#0b1425;border:1px solid var(--line);padding:12px;border-radius:12px;color:var(--muted);font-size:12px;line-height:1.6;margin:0 16px 16px}.footer{color:#718096;font-size:11px;text-align:center;margin-top:26px;line-height:1.7}.footer a{color:#9db7d8}
+
+.themeLabel{align-self:center;color:var(--muted);font-size:12px;font-weight:800;white-space:nowrap}
+.swatch{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:37px;height:35px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-size:11px;font-weight:900;color:#101827}
+.swatch input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.swatch span{pointer-events:none}.swatch:has(input:checked){outline:2px solid var(--text);outline-offset:2px}
+.sw-orange{background:#f97316}.sw-blue{background:#38bdf8}.sw-gold{background:#eab308}.sw-purple{background:#a78bfa}.sw-green{background:#22c55e}
+:root:has(input[name="themeChoice"][value="0"]:checked){--accent:#f97316}
+:root:has(input[name="themeChoice"][value="1"]:checked){--accent:#38bdf8}
+:root:has(input[name="themeChoice"][value="2"]:checked){--accent:#eab308}
+:root:has(input[name="themeChoice"][value="3"]:checked){--accent:#a78bfa}
+:root:has(input[name="themeChoice"][value="4"]:checked){--accent:#22c55e}
+@media(min-width:650px){.controls{grid-template-columns:2fr 1fr 1fr}.controls input{grid-column:auto}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.thumb{height:175px}.detail{grid-template-columns: minmax(220px,.9fr) 1.1fr;align-items:start}.hero{min-height:280px}.toolsList{grid-template-columns:1fr 1fr}}
+@media(min-width:950px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
-
-<header>
-  <h1>BEYBLADE X ZUKAN</h1>
-  <p>ベイブレードX 図鑑</p>
-</header>
-
-<div class="controls">
-  <input id="search" placeholder="ベイの名前を検索..." oninput="render()">
-  <select id="filter" onchange="render()">
-    <option value="all">すべて表示</option>
-    <option value="ready">画像あり</option>
-    <option value="missing">画像準備中</option>
-  </select>
-  <select id="sort" onchange="render()">
-    <option value="default">登録順</option>
-    <option value="name">名前順</option>
-  </select>
-</div>
-
-<div class="themes">
-  <button class="theme" style="background:#e53935" onclick="setTheme('#e53935')"></button>
-  <button class="theme" style="background:#287be0" onclick="setTheme('#287be0')"></button>
-  <button class="theme" style="background:#c49a26" onclick="setTheme('#c49a26')"></button>
-  <button class="theme" style="background:#8c52d8" onclick="setTheme('#8c52d8')"></button>
-  <button class="theme" style="background:#159b68" onclick="setTheme('#159b68')"></button>
-</div>
-
-<div id="count"></div>
-<main class="grid" id="grid"></main>
-
-<div class="modal" id="modal" onclick="backgroundClose(event)">
-  <div class="modal-content">
-    <div id="detailPhoto"></div>
-    <h2 id="detailName"></h2>
-    <div class="part-info">
-      <div>ブレード：<span id="bladeName">未登録</span></div>
-      <div>ラチェット：<span id="ratchetName">未登録</span></div>
-      <div>ビット：<span id="bitName">未登録</span></div>
-    </div>
-
-    <p class="note">
-      以下は自分用の評価だよ。公式の性能数値ではありません。
-      0〜100で自由に設定できます。
-    </p>
-
-    <div id="stats"></div>
-    <div id="saved" class="note">この端末に自動保存されます。</div>
-
-    <div class="actions">
-      <button onclick="resetStats()">評価をリセット</button>
-      <button class="close" onclick="closeModal()">閉じる</button>
-    </div>
-  </div>
-</div>
-
+<header><div class="brand"><div class="logo">X</div><div><div class="eyebrow">BEYBLADE X DATABASE</div><h1>BEYBLADE X ZUKAN</h1></div></div><p class="sub">ベイブレードXを探して、比べて、自分だけの図鑑にしよう。画像・能力データはこのブラウザで管理できるよ！</p></header>
+<main>
+<section class="toolbar">
+ <nav class="tabs"><button class="tab active" data-tab="beys">ベイブレード図鑑</button><button class="tab" data-tab="launchers">ランチャー図鑑</button><button class="tab" data-tab="stadiums">スタジアム図鑑</button></nav>
+ <div class="controls"><input id="search" type="search" placeholder="ベイの名前・型番で検索…"><select id="line"><option value="all">すべてのライン</option><option value="BX">BX ベーシック</option><option value="UX">UX ユニーク</option><option value="CX">CX カスタム</option><option value="BX-00">BX-00 / 限定など</option></select><select id="sort"><option value="name">名前順</option><option value="series">ライン順</option><option value="attack">攻撃力順</option><option value="stamina">持久力順</option></select></div>
+ <div class="chips"><button class="chip active" data-filter="all">すべて</button><button class="chip" data-filter="standard">通常カラー</button><button class="chip" data-filter="limited">限定・特別カラー</button><button class="chip" data-filter="hasImage">画像登録済み</button><button class="chip" data-filter="noImage">画像準備中</button><span class="themeLabel">テーマ：</span>
+<label class="swatch sw-orange" title="オレンジ"><input type="radio" name="themeChoice" value="0" checked><span>橙</span></label>
+<label class="swatch sw-blue" title="ブルー"><input type="radio" name="themeChoice" value="1"><span>青</span></label>
+<label class="swatch sw-gold" title="ゴールド"><input type="radio" name="themeChoice" value="2"><span>金</span></label>
+<label class="swatch sw-purple" title="パープル"><input type="radio" name="themeChoice" value="3"><span>紫</span></label>
+<label class="swatch sw-green" title="グリーン"><input type="radio" name="themeChoice" value="4"><span>緑</span></label><button class="chip" id="exportBtn">画像込みHTMLを書き出す</button></div>
+</section>
+<div class="meta"><span id="count"><strong>106</strong> 件表示 / 登録ベイ <strong>106</strong> 件</span><span>タップで詳細・能力編集</span></div>
+<section id="content" class="grid">
+<article class="card" data-index="0"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ドランソード</h3><p>BX-01 ・ 3-60F</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="1"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ヘルズサイズ</h3><p>BX-02 ・ 4-60T</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="2"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ウィザードアロー</h3><p>BX-03 ・ 4-80B</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="3"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ナイトシールド</h3><p>BX-04 ・ 3-80N</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="4"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランザースパイラル</h3><p>BX-00 ・ 3-80T</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="5"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ナイトランス</h3><p>BX-13 ・ 4-80HN</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="6"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>レオンクロー</h3><p>BX-15 ・ 5-60P</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="7"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ライノホーン</h3><p>BX-19 ・ 3-80S</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="8"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>フェニックスウイング</h3><p>BX-23 ・ 9-60GF</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="9"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ユニコーンスティング</h3><p>BX-26 ・ 5-60GP</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="10"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>シャークエッジ</h3><p>BX-00 ・ 5-60GF</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="11"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランダガー</h3><p>BX-00 ・ 2-80GP</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="12"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ヘルズチェイン</h3><p>BX-00 ・ 5-60HT</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="13"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>コバルトドラグーン</h3><p>BX-34 ・ 2-60C</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="14"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドライガースラッシュ</h3><p>BX-00 ・ 4-80P</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="15"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ヴァイスタイガー</h3><p>BX-33 ・ 3-60U</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="16"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドラシエルシールド</h3><p>BX-00 ・ 7-60D</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="17"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>マンモスタスク</h3><p>BX-00 ・ 2-80E</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="18"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ゼノエクスカリバー</h3><p>BX-00 ・ 3-60GF</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="19"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>クリムゾンガルーダ</h3><p>BX-38 ・ 4-70TP</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="20"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>コバルトドレイク</h3><p>BX-00 ・ 4-60F</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="21"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ライトニングエルドラゴ</h3><p>BX-00 ・ 1-60F</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="22"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランストーム</h3><p>BX-00 ・ 4-60RA</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="23"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ロックレオーネ</h3><p>BX-00 ・ 6-80GN</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="24"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>トリケラプレス</h3><p>BX-44 ・ M-85BS</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="25"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>サムライカリバー</h3><p>BX-45 ・ 6-70M</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="26"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ストームスプリガン</h3><p>BX-00 ・ 2-70M</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="27"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ドランストライク</h3><p>BX-49 ・ 4-50FF</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="28"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ストームペガシス</h3><p>BX-00 ・ 3-70RA</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="29"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ラスタードラグーン</h3><p>BX-52 ・ 6-60LC</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="30"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX</span></div><div class="cardbody"><h3>ジークスペリオン</h3><p>BX-54 ・ 0-70LP</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="31"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ドランバスター</h3><p>UX-01 ・ 1-60A</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="32"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ヘルズハンマー</h3><p>UX-02 ・ 3-70H</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="33"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ウィザードロッド</h3><p>UX-03 ・ 5-70DB</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="34"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>シノビシャドウ</h3><p>UX-05 ・ 4-80HN</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="35"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>レオンクレスト</h3><p>UX-06 ・ 7-60GN</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="36"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>シルバーウルフ</h3><p>UX-08 ・ 3-80FB</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="37"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>サムライセイバー</h3><p>UX-09 ・ 2-70L</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="38"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>インパクトドレイク</h3><p>UX-11 ・ 9-60LR</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="39"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ゴーレムロック</h3><p>UX-13 ・ 1-60UN</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="40"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>スコーピオスピア</h3><p>UX-14 ・ 0-70Z</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="41"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>メテオドラグーン</h3><p>UX-17 ・ 3-70J</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="42"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ナイトメイル</h3><p>UX-00 ・ 3-85BS</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="43"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>バレットグリフォン</h3><p>UX-19 ・ H</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="44"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>グローリーワルキューレ</h3><p>UX-20 ・ LF</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="45"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ヘルズネザー</h3><p>UX-21 ・ デッキセット</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="46"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ドランブレイブ</h3><p>CX-01 ・ S6-60V</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="47"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ウィザードアーク</h3><p>CX-02 ・ R4-55LO</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="48"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ペルセウスダーク</h3><p>CX-03 ・ B6-80W</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="49"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ペガサスブラスト</h3><p>CX-07 ・ ATr</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="50"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ソルエクリプス</h3><p>CX-09 ・ D5-70TK</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="51"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ウルフハント</h3><p>CX-10 ・ F0-60DB</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="52"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>フェニックスフレア</h3><p>CX-12 ・ Z9-80WW</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="53"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>バハムートブリッツ</h3><p>CX-13 ・ BK1-50I</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="54"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ナイトフォートレス</h3><p>CX-14 ・ GV8-70UN</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="55"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ラグナレイジ</h3><p>CX-15 ・ FE4-55Y</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="56"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ティガレイジ</h3><p>CX-00 ・ FT3-60T</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="57"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>クロコトレッド</h3><p>CX-00 ・ セレクト</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="58"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>バックスアントラーズ</h3><p>CX-00 ・ B2-60D</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="59"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>クラーケンリグル</h3><p>CX-00 ・ S3-70O</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="60"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ホーネットフォート</h3><p>CX-00 ・ R7-60T</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="61"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ドレイクブレイブ</h3><p>CX-00 ・ G4-70I</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="62"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ワルキューレボルト</h3><p>CX-00 ・ S4-70V</p><p class="series">通常カラー</p></div></article>
+<article class="card" data-index="63"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ヘルズサイズ</h3><p>BX-00 ・ 4-60T メタルコート:ゴールド</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="64"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>レオンクロー</h3><p>BX-00 ・ 5-60P メタルコート:ゴールド</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="65"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>シャークエッジ</h3><p>BX-00 ・ 5-60GF メタルコート:ブルー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="66"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランダガー</h3><p>BX-00 ・ 2-80GP メタルコート:ブラック（ジャイアンツVer.）</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="67"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランザースパイラル</h3><p>BX-00 ・ 3-80T ブラックVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="68"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>コバルトドラグーン</h3><p>BX-00 ・ 2-60C メタルコート:ブラック</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="69"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>コバルトドレイク</h3><p>BX-00 ・ 4-60F クリアVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="70"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ドランバスター</h3><p>UX-00 ・ 1-60A カラーチョイス</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="71"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>マンモスタスク</h3><p>BX-00 ・ 2-80E メタルコート:ブラック</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="72"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ドランバスター</h3><p>UX-00 ・ 1-60A メタルコート:ブルー FCバルセロナVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="73"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>フェニックスウイング</h3><p>BX-00 ・ 9-60GF メタルコート:ブラック キタニタツヤVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="74"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>ナイトメイル</h3><p>UX-00 ・ 3-85BS メタルコート:ネイビー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="75"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ペガサスブラスト</h3><p>CX-00 ・ ATr メタルコート:レッド</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="76"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ウィザードアーク</h3><p>CX-00 ・ R4-55LO メタルコート:ブラック</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="77"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>エアロペガサス</h3><p>UX-00 ・ 3-70A レッドVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="78"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランソード</h3><p>BX-00 ・ 1-60V メタルコート:ブラック JリーグVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="79"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>コバルトドラグーン</h3><p>BX-00 ・ 9-60F メタルコート:ホワイト JリーグVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="80"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ドランブレイブ</h3><p>CX-00 ・ S6-60V メタルコート:ブラック</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="81"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>サムライセイバー</h3><p>UX-00 ・ 5-60K メタルコート:サムライブルー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="82"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>スコーピオスピア</h3><p>UX-00 ・ 0-70Z メタルコート:マゼンタ</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="83"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>バックスアントラーズ</h3><p>CX-00 ・ B2-60D メタルコート:オレンジ</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="84"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>クラーケンリグル</h3><p>CX-00 ・ S3-70O メタルコート:ブルー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="85"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ホーネットフォート</h3><p>CX-00 ・ R7-60T メタルコート:イエロー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="86"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ドレイクブレイブ</h3><p>CX-00 ・ G4-70I メタルコート:ブルー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="87"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">UX</span></div><div class="cardbody"><h3>グローリーワルキューレ</h3><p>UX-00 ・ LF メタルコート:ブルー</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="88"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ドランソード</h3><p>BX-00 ・ 3-60F バージョン2.0</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="89"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">CX</span></div><div class="cardbody"><h3>ワルキューレボルト</h3><p>CX-00 ・ S4-70V ガンメタVer.</p><p class="series">限定・特別カラー</p></div></article>
+<article class="card" data-index="90"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>アイアンマン</h3><p>BX-00 ・ 4-80B</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="91"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>サノス</h3><p>BX-00 ・ 4-60P</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="92"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>スパイダーマン</h3><p>BX-00 ・ 3-60F</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="93"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ヴェノム</h3><p>BX-00 ・ 3-80N</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="94"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ルーク・スカイウォーカー</h3><p>BX-00 ・ 4-80B</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="95"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ダース・ベイダー</h3><p>BX-00 ・ 4-60P</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="96"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>マンダロリアン</h3><p>BX-00 ・ 3-60F</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="97"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>モフ・ギデオン</h3><p>BX-00 ・ 3-80N</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="98"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>オプティマスプライム</h3><p>BX-00 ・ 4-60P</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="99"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>メガトロン</h3><p>BX-00 ・ 4-80B</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="100"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>オプティマスプライマル</h3><p>BX-00 ・ 3-60F</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="101"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>スタースクリーム</h3><p>BX-00 ・ 3-80N</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="102"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>T-レックス</h3><p>BX-00 ・ コラボモデル</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="103"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>モササウルス</h3><p>BX-00 ・ コラボモデル</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="104"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>スピノサウルス</h3><p>BX-00 ・ コラボモデル</p><p class="series">コラボ</p></div></article>
+<article class="card" data-index="105"><div class="thumb"><div class="noimg">画像<br>準備中</div><span class="tag">BX-00</span></div><div class="cardbody"><h3>ケツァルコアトルス</h3><p>BX-00 ・ コラボモデル</p><p class="series">コラボ</p></div></article>
+</section>
+<div class="footer">商品名・ライン情報の確認先：<a href="https://beyblade.takaratomy.co.jp/beyblade-x/lineup/" target="_blank" rel="noopener">タカラトミー公式 製品情報</a><br>この図鑑はファン向け非公式データベースです。公式画像は権利者の許可なく再配布しないでください。</div>
+</main>
+<div class="modal" id="modal"><div class="dialog"><div class="modalhead"><h2>ベイの詳細</h2><button class="close" id="close">✕</button></div><div class="detail" id="detail"></div><p class="note">画像を選ぶと、このブラウザに保存されるよ。「画像込みHTMLを書き出す」を押すと、登録した画像をHTMLファイル内に埋め込んだ新しいファイルを作れるよ。</p></div></div>
 <script>
-const beys = [
-  {name:"ウィザードロッド",image:"images/wizard-rod.png"},
-  {name:"ナイトランス",image:"images/knight-lance.png"},
-  {name:"ヘルズサイズ",image:"images/hells-scythe.png"},
-  {name:"ヘルズネザー",image:"images/hells-nether.png"},
-  {name:"シルバーウルフ",image:"images/silver-wolf.png"},
-  {name:"グローリーワルキューレ",image:"images/glory-valkyrie.png"},
-  {name:"メテオドラグーン",image:"images/meteor-dragoon.png"},
-  {name:"エアロペガサス",image:"images/aero-pegasus.png"},
-  {name:"ワイバーンホバーン",image:"images/wyvern-hover.png"},
-  {name:"ブラキオウィップ",image:"images/brachio-whip.png"},
-  {name:"ストームペガシス",image:"images/storm-pegasis.png"},
-  {name:"バレットグリフォン",image:"images/bullet-gryphon.png"},
-  {name:"ババムートブリッツ",image:"images/bahamut-blitz.png"}
+// 公式製品情報を参考にしたベイブレード本体データ。セット・ランチャー・スタジアムは別カテゴリ。
+const BEYS = [
+['BX-01','ドランソード','3-60F','通常カラー','BX'],['BX-02','ヘルズサイズ','4-60T','通常カラー','BX'],['BX-03','ウィザードアロー','4-80B','通常カラー','BX'],['BX-04','ナイトシールド','3-80N','通常カラー','BX'],['BX-00','ドランザースパイラル','3-80T','通常カラー','BX-00'],['BX-13','ナイトランス','4-80HN','通常カラー','BX'],['BX-15','レオンクロー','5-60P','通常カラー','BX'],['BX-19','ライノホーン','3-80S','通常カラー','BX'],['BX-23','フェニックスウイング','9-60GF','通常カラー','BX'],['BX-26','ユニコーンスティング','5-60GP','通常カラー','BX'],['BX-00','シャークエッジ','5-60GF','通常カラー','BX-00'],['BX-00','ドランダガー','2-80GP','通常カラー','BX-00'],['BX-00','ヘルズチェイン','5-60HT','通常カラー','BX-00'],['BX-34','コバルトドラグーン','2-60C','通常カラー','BX'],['BX-00','ドライガースラッシュ','4-80P','通常カラー','BX-00'],['BX-33','ヴァイスタイガー','3-60U','通常カラー','BX'],['BX-00','ドラシエルシールド','7-60D','通常カラー','BX-00'],['BX-00','マンモスタスク','2-80E','通常カラー','BX-00'],['BX-00','ゼノエクスカリバー','3-60GF','通常カラー','BX-00'],['BX-38','クリムゾンガルーダ','4-70TP','通常カラー','BX'],['BX-00','コバルトドレイク','4-60F','通常カラー','BX-00'],['BX-00','ライトニングエルドラゴ','1-60F','通常カラー','BX-00'],['BX-00','ドランストーム','4-60RA','通常カラー','BX-00'],['BX-00','ロックレオーネ','6-80GN','通常カラー','BX-00'],['BX-44','トリケラプレス','M-85BS','通常カラー','BX'],['BX-45','サムライカリバー','6-70M','通常カラー','BX'],['BX-00','ストームスプリガン','2-70M','通常カラー','BX-00'],['BX-49','ドランストライク','4-50FF','通常カラー','BX'],['BX-00','ストームペガシス','3-70RA','通常カラー','BX-00'],['BX-52','ラスタードラグーン','6-60LC','通常カラー','BX'],['BX-54','ジークスペリオン','0-70LP','通常カラー','BX'],
+['UX-01','ドランバスター','1-60A','通常カラー','UX'],['UX-02','ヘルズハンマー','3-70H','通常カラー','UX'],['UX-03','ウィザードロッド','5-70DB','通常カラー','UX'],['UX-05','シノビシャドウ','4-80HN','通常カラー','UX'],['UX-06','レオンクレスト','7-60GN','通常カラー','UX'],['UX-08','シルバーウルフ','3-80FB','通常カラー','UX'],['UX-09','サムライセイバー','2-70L','通常カラー','UX'],['UX-11','インパクトドレイク','9-60LR','通常カラー','UX'],['UX-13','ゴーレムロック','1-60UN','通常カラー','UX'],['UX-14','スコーピオスピア','0-70Z','通常カラー','UX'],['UX-17','メテオドラグーン','3-70J','通常カラー','UX'],['UX-00','ナイトメイル','3-85BS','通常カラー','UX'],['UX-19','バレットグリフォン','H','通常カラー','UX'],['UX-20','グローリーワルキューレ','LF','通常カラー','UX'],['UX-21','ヘルズネザー','デッキセット','通常カラー','UX'],
+['CX-01','ドランブレイブ','S6-60V','通常カラー','CX'],['CX-02','ウィザードアーク','R4-55LO','通常カラー','CX'],['CX-03','ペルセウスダーク','B6-80W','通常カラー','CX'],['CX-07','ペガサスブラスト','ATr','通常カラー','CX'],['CX-09','ソルエクリプス','D5-70TK','通常カラー','CX'],['CX-10','ウルフハント','F0-60DB','通常カラー','CX'],['CX-12','フェニックスフレア','Z9-80WW','通常カラー','CX'],['CX-13','バハムートブリッツ','BK1-50I','通常カラー','CX'],['CX-14','ナイトフォートレス','GV8-70UN','通常カラー','CX'],['CX-15','ラグナレイジ','FE4-55Y','通常カラー','CX'],['CX-00','ティガレイジ','FT3-60T','通常カラー','CX'],['CX-00','クロコトレッド','セレクト','通常カラー','CX'],['CX-00','バックスアントラーズ','B2-60D','通常カラー','CX'],['CX-00','クラーケンリグル','S3-70O','通常カラー','CX'],['CX-00','ホーネットフォート','R7-60T','通常カラー','CX'],['CX-00','ドレイクブレイブ','G4-70I','通常カラー','CX'],['CX-00','ワルキューレボルト','S4-70V','通常カラー','CX'],
+// 公式掲載の限定・カラー違いは通常版と別エントリー
+['BX-00','ヘルズサイズ','4-60T メタルコート:ゴールド','限定・特別カラー','BX-00'],['BX-00','レオンクロー','5-60P メタルコート:ゴールド','限定・特別カラー','BX-00'],['BX-00','シャークエッジ','5-60GF メタルコート:ブルー','限定・特別カラー','BX-00'],['BX-00','ドランダガー','2-80GP メタルコート:ブラック（ジャイアンツVer.）','限定・特別カラー','BX-00'],['BX-00','ドランザースパイラル','3-80T ブラックVer.','限定・特別カラー','BX-00'],['BX-00','コバルトドラグーン','2-60C メタルコート:ブラック','限定・特別カラー','BX-00'],['BX-00','コバルトドレイク','4-60F クリアVer.','限定・特別カラー','BX-00'],['UX-00','ドランバスター','1-60A カラーチョイス','限定・特別カラー','UX'],['BX-00','マンモスタスク','2-80E メタルコート:ブラック','限定・特別カラー','BX-00'],['UX-00','ドランバスター','1-60A メタルコート:ブルー FCバルセロナVer.','限定・特別カラー','UX'],['BX-00','フェニックスウイング','9-60GF メタルコート:ブラック キタニタツヤVer.','限定・特別カラー','BX-00'],['UX-00','ナイトメイル','3-85BS メタルコート:ネイビー','限定・特別カラー','UX'],['CX-00','ペガサスブラスト','ATr メタルコート:レッド','限定・特別カラー','CX'],['CX-00','ウィザードアーク','R4-55LO メタルコート:ブラック','限定・特別カラー','CX'],['UX-00','エアロペガサス','3-70A レッドVer.','限定・特別カラー','UX'],['BX-00','ドランソード','1-60V メタルコート:ブラック JリーグVer.','限定・特別カラー','BX-00'],['BX-00','コバルトドラグーン','9-60F メタルコート:ホワイト JリーグVer.','限定・特別カラー','BX-00'],['CX-00','ドランブレイブ','S6-60V メタルコート:ブラック','限定・特別カラー','CX'],['UX-00','サムライセイバー','5-60K メタルコート:サムライブルー','限定・特別カラー','UX'],['UX-00','スコーピオスピア','0-70Z メタルコート:マゼンタ','限定・特別カラー','UX'],['CX-00','バックスアントラーズ','B2-60D メタルコート:オレンジ','限定・特別カラー','CX'],['CX-00','クラーケンリグル','S3-70O メタルコート:ブルー','限定・特別カラー','CX'],['CX-00','ホーネットフォート','R7-60T メタルコート:イエロー','限定・特別カラー','CX'],['CX-00','ドレイクブレイブ','G4-70I メタルコート:ブルー','限定・特別カラー','CX'],['UX-00','グローリーワルキューレ','LF メタルコート:ブルー','限定・特別カラー','UX'],['BX-00','ドランソード','3-60F バージョン2.0','限定・特別カラー','BX-00'],['CX-00','ワルキューレボルト','S4-70V ガンメタVer.','限定・特別カラー','CX'],
+// コラボ商品に収録されたベイ
+['BX-00','アイアンマン','4-80B','コラボ','BX-00'],['BX-00','サノス','4-60P','コラボ','BX-00'],['BX-00','スパイダーマン','3-60F','コラボ','BX-00'],['BX-00','ヴェノム','3-80N','コラボ','BX-00'],['BX-00','ルーク・スカイウォーカー','4-80B','コラボ','BX-00'],['BX-00','ダース・ベイダー','4-60P','コラボ','BX-00'],['BX-00','マンダロリアン','3-60F','コラボ','BX-00'],['BX-00','モフ・ギデオン','3-80N','コラボ','BX-00'],['BX-00','オプティマスプライム','4-60P','コラボ','BX-00'],['BX-00','メガトロン','4-80B','コラボ','BX-00'],['BX-00','オプティマスプライマル','3-60F','コラボ','BX-00'],['BX-00','スタースクリーム','3-80N','コラボ','BX-00'],['BX-00','T-レックス','コラボモデル','コラボ','BX-00'],['BX-00','モササウルス','コラボモデル','コラボ','BX-00'],['BX-00','スピノサウルス','コラボモデル','コラボ','BX-00'],['BX-00','ケツァルコアトルス','コラボモデル','コラボ','BX-00']
 ];
-
-const statNames = [
-  ["attack","攻撃"],
-  ["defense","防御"],
-  ["stamina","持久"],
-  ["balance","バランス"]
-];
-
-let selected = null;
-
-function getStats(name) {
-  const all = JSON.parse(localStorage.getItem("bx_stats") || "{}");
-  return all[name] || {
-    attack:50, defense:50, stamina:50, balance:50
-  };
-}
-
-function saveStat(name,key,value) {
-  const all = JSON.parse(localStorage.getItem("bx_stats") || "{}");
-  if (!all[name]) all[name] = getStats(name);
-  all[name][key] = Math.max(0,Math.min(100,Number(value)||0));
-  localStorage.setItem("bx_stats",JSON.stringify(all));
-  document.getElementById("saved").textContent =
-    "保存しました！この端末に記録されています。";
-  updateStatDisplay();
-}
-
-function imageHTML(bey,detail=false) {
-  const className = detail ? "detail-image" : "card-image";
-  const placeholderClass = detail ? "detail-placeholder" : "placeholder";
-  return `
-    <img class="${className}"
-      src="${bey.image}"
-      alt="${bey.name}"
-      onerror="this.outerHTML='<div class=\\'${placeholderClass}\\'>画像準備中</div>'">
-  `;
-}
-
-function render() {
-  const word = document.getElementById("search").value.trim();
-  const filter = document.getElementById("filter").value;
-  const sort = document.getElementById("sort").value;
-
-  let list = beys.filter(b => b.name.includes(word));
-
-  if (filter === "missing") {
-    list = list.filter(b => !hasImage(b));
-  }
-  if (filter === "ready") {
-    list = list.filter(b => hasImage(b));
-  }
-  if (sort === "name") {
-    list.sort((a,b) => a.name.localeCompare(b.name,"ja"));
-  }
-
-  document.getElementById("count").textContent =
-    `${list.length}種類 登録中`;
-
-  document.getElementById("grid").innerHTML = list.map(b => {
-    const s = getStats(b.name);
-    return `
-      <article class="bey" onclick="showDetail('${b.name}')">
-        ${imageHTML(b)}
-        <h3>${b.name}</h3>
-        <div class="small-stats">
-          攻撃 ${s.attack} ・ 防御 ${s.defense}<br>
-          持久 ${s.stamina} ・ バランス ${s.balance}
-        </div>
-      </article>
-    `;
-  }).join("");
-}
-
-function hasImage(bey) {
-  // GitHubに画像を追加した後、実際の表示で確認できます。
-  // 画像ファイルがまだない場合は読み込み失敗時に準備中になります。
-  return false;
-}
-
-function showDetail(name) {
-  selected = beys.find(b => b.name === name);
-  if (!selected) return;
-
-  document.getElementById("detailName").textContent = name;
-  document.getElementById("detailPhoto").innerHTML =
-    imageHTML(selected,true);
-
-  document.getElementById("modal").style.display = "block";
-  document.getElementById("saved").textContent =
-    "この端末に自動保存されます。";
-  updateStatDisplay();
-}
-
-function updateStatDisplay() {
-  if (!selected) return;
-  const s = getStats(selected.name);
-
-  document.getElementById("stats").innerHTML =
-    statNames.map(([key,label]) => `
-      <div class="stat">
-        <div class="stat-top">
-          <strong>${label}</strong>
-          <input type="number" min="0" max="100"
-            value="${s[key]}"
-            onchange="saveStat('${selected.name}','${key}',this.value)">
-        </div>
-        <input type="range" min="0" max="100"
-          value="${s[key]}"
-          oninput="saveStat('${selected.name}','${key}',this.value)">
-      </div>
-    `).join("");
-}
-
-function resetStats() {
-  if (!selected) return;
-  const all = JSON.parse(localStorage.getItem("bx_stats") || "{}");
-  all[selected.name] = {
-    attack:50, defense:50, stamina:50, balance:50
-  };
-  localStorage.setItem("bx_stats",JSON.stringify(all));
-  updateStatDisplay();
-  render();
-  document.getElementById("saved").textContent =
-    "初期値に戻しました。";
-}
-
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-  selected = null;
-}
-function backgroundClose(event) {
-  if (event.target.id === "modal") closeModal();
-}
-
-function setTheme(color) {
-  document.documentElement.style.setProperty("--main",color);
-  localStorage.setItem("bx_theme",color);
-}
-
-const savedTheme = localStorage.getItem("bx_theme");
-if (savedTheme) setTheme(savedTheme);
-
-render();
+const LAUNCHERS=[['ワインダーランチャー','右回転用・ワインダー式'],['ワインダーランチャーL','左回転用・ワインダー式'],['ストリングランチャー','ひもを引くタイプ'],['ストリングランチャーL','左回転用・ストリング式'],['エントリーランチャー','入門向けランチャー'],['ホールドランチャー','ホールド機構付きランチャー'],['ランチャーグリップ','ランチャーを持ちやすくする補助パーツ'],['ベイバトルパス','ランチャーに装着する連動デバイス']];
+const STADIUMS=[['エクストリームスタジアム','標準的なエクストリームライン搭載スタジアム'],['ワイドエクストリームスタジアム','ワイドタイプのスタジアム'],['ダブルエクストリームスタジアム','2人で楽しめるセット付属スタジアム'],['ポータブル系スタジアム','持ち運び向けスタジアム']];
+const $=s=>document.querySelector(s);let activeTab='beys',filter='all',selected=null,themeIndex=0;
+const themes=['#f97316','#38bdf8','#eab308','#a78bfa','#22c55e'];
+const safeKey=(b,i)=>`${b[0]}_${b[1]}_${b[3]}_${i}`;
+const memoryStore={};
+function readStore(k){try{return localStorage.getItem(k)}catch{return memoryStore[k]??null}}
+function writeStore(k,v){try{localStorage.setItem(k,v)}catch{memoryStore[k]=v}}
+function storeGet(k,def){try{return JSON.parse(readStore(k))??def}catch{return def}}
+function imageMap(){return Object.assign({},window.EMBEDDED_IMAGES||{},storeGet('bxz_images',{}))}
+function statsMap(){return storeGet('bxz_stats',{})}
+function statsFor(key){return statsMap()[key]||{attack:50,defense:50,stamina:50,balance:50}}
+function placeholder(label){let hue=label.split('').reduce((a,c)=>a+c.charCodeAt(0),0)%360;let svg=`<svg xmlns="http://www.w3.org/2000/svg" width="420" height="320" viewBox="0 0 420 320"><defs><radialGradient id="g"><stop stop-color="hsl(${hue},75%,42%)"/><stop offset="1" stop-color="#101827"/></radialGradient></defs><rect width="420" height="320" rx="28" fill="url(#g)"/><circle cx="210" cy="145" r="92" fill="none" stroke="#dbeafe" stroke-width="12" opacity=".8"/><circle cx="210" cy="145" r="56" fill="none" stroke="#f8fafc" stroke-width="9" opacity=".8"/><path d="M210 35 L238 110 L330 145 L238 180 L210 255 L182 180 L90 145 L182 110Z" fill="none" stroke="#fff" stroke-width="8" opacity=".75"/><text x="210" y="295" text-anchor="middle" fill="#fff" font-size="18" font-family="sans-serif">${label.replace(/[<>&]/g,'')}</text></svg>`;return 'data:image/svg+xml;base64,'+btoa(unescape(encodeURIComponent(svg)))}
+function render(){if(activeTab!=='beys'){renderTools();return}$('#content').className='grid';let q=$('#search').value.trim().toLowerCase(),line=$('#line').value,sort=$('#sort').value,imgs=imageMap();let rows=BEYS.map((b,i)=>({...b,key:safeKey(b,i),i}));rows=rows.filter(b=>{let text=[b[0],b[1],b[2],b[3]].join(' ').toLowerCase();return (!q||text.includes(q))&&(line==='all'||b[4]===line)&&(filter==='all'||(filter==='standard'?b[3]==='通常カラー':filter==='limited'?b[3]==='限定・特別カラー':filter==='hasImage'?!!imgs[b.key]:filter==='noImage'?!imgs[b.key]:true))});if(sort==='name')rows.sort((a,b)=>a[1].localeCompare(b[1],'ja'));if(sort==='series')rows.sort((a,b)=>a[4].localeCompare(b[4])||a[0].localeCompare(b[0]));if(sort==='attack'||sort==='stamina')rows.sort((a,b)=>statsFor(b.key)[sort]-statsFor(a.key)[sort]);$('#count').innerHTML=`<strong>${rows.length}</strong> 件表示 / 登録ベイ <strong>${BEYS.length}</strong> 件`;$('#content').innerHTML=rows.length?rows.map(b=>{let im=imgs[b.key];return `<article class="card" data-index="${b.i}"><div class="thumb">${im?`<img src="${im}" alt="${b[1]}">`:`<div class="noimg">画像<br>準備中</div>`}<span class="tag">${b[4]}</span></div><div class="cardbody"><h3>${b[1]}</h3><p>${b[0]} ・ ${b[2]}</p><p class="series">${b[3]}</p></div></article>`}).join(''):'<div class="empty">該当するベイが見つからなかったよ。検索条件を変えてみてね！</div>';document.querySelectorAll('.card').forEach(el=>el.addEventListener('click',()=>openDetail(Number(el.dataset.index))))}
+function renderTools(){let list=activeTab==='launchers'?LAUNCHERS:STADIUMS;$('#count').innerHTML=`<strong>${list.length}</strong> 件登録`;$('#content').className='toolsList';$('#content').innerHTML=list.map((x,i)=>`<article class="toolcard"><h3>${x[0]}</h3><p>${x[1]}</p></article>`).join('');}
+function openDetail(i){selected=i;let b=BEYS[i],key=safeKey(b,i),im=imageMap()[key],st=statsFor(key);$('#detail').innerHTML=`<div class="hero">${im?`<img src="${im}" alt="${b[1]}">`:`<div class="noimg">画像<br>準備中</div>`}</div><div class="info"><h3>${b[1]}</h3><div class="muted">${b[0]} ・ ${b[2]}<br>${b[3]} / ${b[4]}ライン</div><div class="stats">${[['attack','攻撃'],['defense','防御'],['stamina','持久'],['balance','バランス']].map(([k,n])=>`<div class="stat"><label>${n}<input type="number" min="0" max="100" value="${st[k]}" data-stat="${k}"></label><input type="range" min="0" max="100" value="${st[k]}" data-range="${k}"></div>`).join('')}</div><div class="actions"><label class="filelabel">画像を登録<input type="file" id="imageFile" accept="image/*"></label><button id="resetStats">能力を50に戻す</button><button class="primary" id="saveStats">能力を保存</button></div><p class="muted" style="margin-top:10px">能力値は自分で決めるメモ用の数値だよ。公式の性能評価ではないよ。</p></div>`;$('#modal').classList.add('show');document.querySelectorAll('[data-range]').forEach(el=>el.addEventListener('input',()=>{let n=el.dataset.range;document.querySelector(`[data-stat="${n}"]`).value=el.value}));$('#saveStats').onclick=()=>{let all=statsMap(),obj={};document.querySelectorAll('[data-stat]').forEach(el=>obj[el.dataset.stat]=Math.max(0,Math.min(100,Number(el.value)||0)));all[key]=obj;writeStore('bxz_stats',JSON.stringify(all));render();};$('#resetStats').onclick=()=>{document.querySelectorAll('[data-stat]').forEach(el=>el.value=50);document.querySelectorAll('[data-range]').forEach(el=>el.value=50)};$('#imageFile').onchange=e=>{let f=e.target.files[0];if(!f)return;if(f.size>5*1024*1024){alert('画像は5MB以下にしてね');return}let r=new FileReader();r.onload=()=>{let all=imageMap();all[key]=r.result;writeStore('bxz_images',JSON.stringify(all));openDetail(i);render()};r.readAsDataURL(f)}}
+function closeModal(){$('#modal').classList.remove('show');selected=null}
+function exportHTML(){let imgs=imageMap(),stats=statsMap();let clone=document.documentElement.cloneNode(true);let script=clone.querySelector('script');let inject=document.createElement('script');inject.textContent='window.EMBEDDED_IMAGES='+JSON.stringify(imgs)+';window.EMBEDDED_STATS='+JSON.stringify(stats)+';';clone.insertBefore(inject,script);let html='<!doctype html>\n'+clone.outerHTML;let blob=new Blob([html],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='beyblade-x-zukan.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)}
+$('#search').addEventListener('input',render);$('#line').addEventListener('change',render);$('#sort').addEventListener('change',render);document.querySelectorAll('.tab').forEach(el=>el.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));el.classList.add('active');activeTab=el.dataset.tab;$('#search').style.display=activeTab==='beys'?'block':'none';$('#line').style.display=activeTab==='beys'?'block':'none';$('#sort').style.display=activeTab==='beys'?'block':'none';document.querySelector('.chips').style.display=activeTab==='beys'?'flex':'none';$('#content').className=activeTab==='beys'?'grid':'toolsList';render()});document.querySelectorAll('[data-filter]').forEach(el=>el.onclick=()=>{filter=el.dataset.filter;document.querySelectorAll('[data-filter]').forEach(x=>x.classList.toggle('active',x===el));render()});// テーマカラーは下の色ボタン（ラジオボタン）で変更するため、旧themeBtn処理は不要$('#exportBtn').onclick=exportHTML;$('#close').onclick=closeModal;$('#modal').onclick=e=>{if(e.target.id==='modal')closeModal()};
+let savedTheme=Number(readStore('bxz_theme')||0);if(savedTheme>=0&&savedTheme<themes.length){themeIndex=savedTheme;document.documentElement.style.setProperty('--accent',themes[themeIndex]);let radio=document.querySelector(`input[name=themeChoice][value="${themeIndex}"]`);if(radio)radio.checked=true}if(window.EMBEDDED_STATS&&!readStore('bxz_stats'))writeStore('bxz_stats',JSON.stringify(window.EMBEDDED_STATS));render();
+document.querySelectorAll('input[name="themeChoice"]').forEach(el=>el.addEventListener('change',()=>{themeIndex=Number(el.value);document.documentElement.style.setProperty('--accent',themes[themeIndex]);writeStore('bxz_theme',String(themeIndex))}));
 </script>
-</body>
-</html>
+</body></html>
