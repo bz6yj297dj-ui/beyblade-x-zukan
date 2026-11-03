@@ -6,7 +6,7 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BEYBLADE X ZUKAN</title>
 
@@ -14,19 +14,19 @@
 
 :root {
 
-  --bg:#111318;
+  --main:#e53935;
 
-  --panel:#20232b;
+  --bg:#101116;
 
-  --accent:#ef4444;
+  --card:#1d2029;
 
   --text:#fff;
 
-  --muted:#a5a9b3;
+  --sub:#aeb4c2;
 
 }
 
-* {box-sizing:border-box}
+* { box-sizing:border-box; }
 
 body {
 
@@ -36,131 +36,175 @@ body {
 
   color:var(--text);
 
-  font-family:Arial,sans-serif;
+  font-family:Arial,"Noto Sans JP",sans-serif;
 
 }
 
 header {
 
-  padding:28px 16px;
+  padding:24px 16px 18px;
 
   text-align:center;
 
-  background:linear-gradient(135deg,#303541,#111318);
+  background:linear-gradient(135deg,var(--main),#171923);
 
 }
 
-h1 {font-size:30px;letter-spacing:3px;margin:5px}
+header h1 {
 
-header p {color:var(--muted)}
+  margin:0;
 
-main {max-width:1100px;margin:auto;padding:18px}
+  font-size:28px;
+
+  letter-spacing:2px;
+
+}
+
+header p { color:#eee; margin:8px 0 0; }
+
+.controls {
+
+  padding:14px;
+
+  display:grid;
+
+  gap:10px;
+
+  max-width:900px;
+
+  margin:auto;
+
+}
 
 input,select,button {
 
-  padding:12px;
-
-  border:0;
+  font:inherit;
 
   border-radius:10px;
 
-  font-size:15px;
+  padding:12px;
+
+  border:1px solid #414653;
 
 }
 
 input,select {
 
-  background:var(--panel);
+  background:#252936;
 
   color:white;
+
+  min-width:0;
 
 }
 
 button {
 
-  background:var(--accent);
+  cursor:pointer;
+
+  background:var(--main);
 
   color:white;
 
-  cursor:pointer;
+  border:0;
+
+  font-weight:bold;
 
 }
-
-.search {width:100%;margin:10px 0}
-
-.controls {
-
-  display:flex;
-
-  gap:10px;
-
-  flex-wrap:wrap;
-
-  margin:12px 0;
-
-}
-
-.controls select {flex:1;min-width:130px}
 
 .themes {
 
   display:flex;
 
+  gap:8px;
+
   justify-content:center;
 
-  gap:10px;
-
-  margin-top:18px;
+  flex-wrap:wrap;
 
 }
 
 .theme {
 
-  width:30px;
+  width:34px;
 
-  height:30px;
+  height:34px;
 
   padding:0;
 
-  border-radius:50%;
-
   border:2px solid white;
+
+  border-radius:50%;
 
 }
 
-#count {color:var(--muted);margin:18px 0}
+#count {
+
+  text-align:center;
+
+  color:var(--sub);
+
+  padding:4px;
+
+}
 
 .grid {
 
   display:grid;
 
-  grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+  grid-template-columns:repeat(2,minmax(0,1fr));
 
-  gap:14px;
+  gap:12px;
+
+  padding:12px;
+
+  max-width:1000px;
+
+  margin:auto;
 
 }
 
-.card {
+.bey {
 
-  background:var(--panel);
+  background:var(--card);
 
-  border:1px solid #414550;
+  border:1px solid #343a49;
 
   border-radius:14px;
 
-  overflow:hidden;
+  padding:10px;
 
   cursor:pointer;
 
+  min-width:0;
+
 }
 
-.card:active {transform:scale(.97)}
+.bey:active { transform:scale(.98); }
 
-.photo {
+.card-image {
 
-  height:145px;
+  width:100%;
 
-  background:#30343e;
+  aspect-ratio:1/1;
+
+  object-fit:contain;
+
+  background:#11141b;
+
+  border-radius:10px;
+
+}
+
+.placeholder {
+
+  width:100%;
+
+  aspect-ratio:1/1;
+
+  background:#11141b;
+
+  border-radius:10px;
 
   display:flex;
 
@@ -168,105 +212,133 @@ button {
 
   justify-content:center;
 
-  text-align:center;
-
-  color:var(--muted);
-
-  padding:10px;
+  color:#929aaa;
 
   font-size:13px;
 
-}
-
-.photo img {
-
-  width:100%;
-
-  height:100%;
-
-  object-fit:contain;
+  text-align:center;
 
 }
 
-.info {padding:12px}
+.bey h3 {
 
-.info h3 {font-size:15px;margin:0 0 8px}
+  margin:10px 0 5px;
 
-.tag {color:var(--accent);font-size:12px}
+  font-size:15px;
+
+}
+
+.small-stats {
+
+  color:var(--sub);
+
+  font-size:12px;
+
+  line-height:1.7;
+
+}
 
 .modal {
+
+  display:none;
 
   position:fixed;
 
   inset:0;
 
+  z-index:10;
+
   background:#000c;
 
-  display:none;
+  overflow-y:auto;
 
-  justify-content:center;
-
-  align-items:center;
-
-  padding:14px;
-
-  z-index:10;
+  padding:18px 10px;
 
 }
 
 .modal-content {
 
-  background:var(--panel);
+  background:#202430;
 
-  padding:20px;
+  border:1px solid #454b5a;
 
-  border-radius:18px;
+  border-radius:16px;
 
-  width:100%;
+  padding:16px;
 
-  max-width:460px;
+  max-width:520px;
 
-  max-height:90vh;
-
-  overflow:auto;
+  margin:20px auto;
 
 }
 
-.modal-content .photo {
+.detail-image {
 
-  height:190px;
+  width:100%;
+
+  max-height:300px;
+
+  object-fit:contain;
+
+  background:#11141b;
 
   border-radius:12px;
 
 }
 
-.detail-row {
+.detail-placeholder {
 
-  padding:10px 0;
+  min-height:180px;
 
-  border-bottom:1px solid #444;
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  color:#929aaa;
+
+  background:#11141b;
+
+  border-radius:12px;
 
 }
 
-.stat {margin:17px 0}
+.modal h2 { margin:12px 0; }
 
-.stat-title {
+.part-info {
+
+  color:var(--sub);
+
+  line-height:1.8;
+
+  font-size:14px;
+
+}
+
+.stat {
+
+  margin:15px 0;
+
+}
+
+.stat-top {
 
   display:flex;
 
   justify-content:space-between;
 
-  margin-bottom:8px;
+  align-items:center;
+
+  gap:10px;
 
 }
 
 .stat input[type=number] {
 
-  width:75px;
+  width:76px;
 
-  text-align:center;
-
-  padding:8px;
+  padding:7px;
 
 }
 
@@ -274,7 +346,7 @@ button {
 
   width:100%;
 
-  accent-color:var(--accent);
+  accent-color:var(--main);
 
   padding:0;
 
@@ -282,21 +354,25 @@ button {
 
 .actions {
 
-  display:flex;
+  display:grid;
 
-  gap:8px;
+  grid-template-columns:1fr 1fr;
 
-  margin-top:15px;
+  gap:10px;
+
+  margin-top:18px;
 
 }
 
-.actions button {flex:1}
+.close {
 
-.close {width:100%;margin-top:12px}
+  background:#555d6e;
 
-.small {
+}
 
-  color:var(--muted);
+.note {
+
+  color:var(--sub);
 
   font-size:12px;
 
@@ -304,15 +380,11 @@ button {
 
 }
 
-footer {
+@media(min-width:650px) {
 
-  text-align:center;
+  .grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
 
-  padding:30px;
-
-  color:var(--muted);
-
-  font-size:12px;
+  .controls { grid-template-columns:2fr 1fr 1fr; }
 
 }
 
@@ -324,367 +396,369 @@ footer {
 
 <header>
 
-  <h1>BEYBLADE X</h1>
+  <h1>BEYBLADE X ZUKAN</h1>
 
-  <h2>ZUKAN</h2>
-
-  <p>THE ULTIMATE BEYBLADE DATABASE</p>
-
-  <div class="themes">
-
-    <button class="theme" style="background:#ef4444"
-
-      onclick="setTheme('#ef4444')"></button>
-
-    <button class="theme" style="background:#38bdf8"
-
-      onclick="setTheme('#38bdf8')"></button>
-
-    <button class="theme" style="background:#eabf45"
-
-      onclick="setTheme('#eabf45')"></button>
-
-    <button class="theme" style="background:#c084fc"
-
-      onclick="setTheme('#c084fc')"></button>
-
-    <button class="theme" style="background:#4ade80"
-
-      onclick="setTheme('#4ade80')"></button>
-
-  </div>
-
-  <p class="small">カラーをタッチして変更！</p>
+  <p>ベイブレードX 図鑑</p>
 
 </header>
 
-<main>
+<div class="controls">
 
-  <input id="search" class="search"
+  <input id="search" placeholder="ベイの名前を検索..." oninput="render()">
 
-    placeholder="🔍 ベイの名前を検索..."
+  <select id="filter" onchange="render()">
 
-    oninput="render()">
+    <option value="all">すべて表示</option>
 
-  <div class="controls">
+    <option value="ready">画像あり</option>
 
-    <select id="type" onchange="render()">
+    <option value="missing">画像準備中</option>
 
-      <option value="all">すべてのタイプ</option>
+  </select>
 
-      <option value="未確認">タイプ未確認</option>
+  <select id="sort" onchange="render()">
 
-    </select>
+    <option value="default">登録順</option>
 
-    <select id="sort" onchange="render()">
+    <option value="name">名前順</option>
 
-      <option value="default">通常順</option>
-
-      <option value="name">名前順</option>
-
-    </select>
-
-  </div>
-
-  <div id="count"></div>
-
-  <div id="grid" class="grid"></div>
-
-</main>
-
-<div class="modal" id="modal"
-
-  onclick="closeOutside(event)">
-
-  <div class="modal-content">
-
-    <div id="detail"></div>
-
-    <button class="close" onclick="closeModal()">閉じる</button>
-
-  </div>
+  </select>
 
 </div>
 
-<footer>
+<div class="themes">
 
-  BEYBLADE X ZUKAN<br>
+  <button class="theme" style="background:#e53935" onclick="setTheme('#e53935')"></button>
 
-  Fan-made database
+  <button class="theme" style="background:#287be0" onclick="setTheme('#287be0')"></button>
 
-</footer>
+  <button class="theme" style="background:#c49a26" onclick="setTheme('#c49a26')"></button>
 
-<script>
+  <button class="theme" style="background:#8c52d8" onclick="setTheme('#8c52d8')"></button>
 
-const bays = [
+  <button class="theme" style="background:#159b68" onclick="setTheme('#159b68')"></button>
 
-  "ウィザードロッド",
+</div>
 
-  "ナイトランス",
+<div id="count"></div>
 
-  "ヘルズサイズ",
+<main class="grid" id="grid"></main>
 
-  "ヘルズネザー",
+<div class="modal" id="modal" onclick="backgroundClose(event)">
 
-  "シルバーウルフ",
+  <div class="modal-content">
 
-  "グローリーワルキューレ",
+    <div id="detailPhoto"></div>
 
-  "メテオドラグーン",
+    <h2 id="detailName"></h2>
 
-  "エアロペガサス",
+    <div class="part-info">
 
-  "ワイバーンホバーン",
+      <div>ブレード：<span id="bladeName">未登録</span></div>
 
-  "ブラキオウィップ",
+      <div>ラチェット：<span id="ratchetName">未登録</span></div>
 
-  "ストームペガシス",
+      <div>ビット：<span id="bitName">未登録</span></div>
 
-  "バレットグリフォン",
+    </div>
 
-  "ババムートブリッツ"
+    <p class="note">
 
-].map(name => ({
+      以下は自分用の評価だよ。公式の性能数値ではありません。
 
-  name,
-
-  type:"未確認",
-
-  parts:"未登録",
-
-  rarity:"未設定"
-
-}));
-
-const statNames = ["攻撃力","防御力","持久力","バランス"];
-
-function getStats(name) {
-
-  try {
-
-    return JSON.parse(localStorage.getItem("stats_"+name)) ||
-
-      {攻撃力:50,防御力:50,持久力:50,バランス:50};
-
-  } catch(e) {
-
-    return {攻撃力:50,防御力:50,持久力:50,バランス:50};
-
-  }
-
-}
-
-function setTheme(color) {
-
-  document.documentElement.style.setProperty("--accent",color);
-
-  localStorage.setItem("beyTheme",color);
-
-}
-
-const savedTheme=localStorage.getItem("beyTheme");
-
-if(savedTheme) setTheme(savedTheme);
-
-function render() {
-
-  const query=document.getElementById("search").value.toLowerCase();
-
-  const type=document.getElementById("type").value;
-
-  let list=bays.filter(b =>
-
-    b.name.toLowerCase().includes(query) &&
-
-    (type==="all" || b.type===type)
-
-  );
-
-  if(document.getElementById("sort").value==="name") {
-
-    list.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
-
-  }
-
-  document.getElementById("count").textContent=
-
-    "登録ベイ："+list.length+"種類";
-
-  document.getElementById("grid").innerHTML="";
-
-  list.forEach(b => {
-
-    const card=document.createElement("div");
-
-    card.className="card";
-
-    card.innerHTML=`
-
-      <div class="photo">公式画像準備中</div>
-
-      <div class="info">
-
-        <h3></h3>
-
-        <span class="tag"></span>
-
-      </div>
-
-    `;
-
-    card.querySelector("h3").textContent=b.name;
-
-    card.querySelector(".tag").textContent=b.type;
-
-    card.onclick=()=>showDetail(b.name);
-
-    document.getElementById("grid").appendChild(card);
-
-  });
-
-}
-
-function showDetail(name) {
-
-  const b=bays.find(x=>x.name===name);
-
-  const stats=getStats(name);
-
-  const detail=document.getElementById("detail");
-
-  detail.innerHTML=`
-
-    <div class="photo">公式画像準備中</div>
-
-    <h2></h2>
-
-    <div class="detail-row">タイプ：未確認</div>
-
-    <div class="detail-row">パーツ構成：未登録</div>
-
-    <div class="detail-row">レア度：未設定</div>
-
-    <p><b>MY STATUS</b></p>
-
-    <p class="small">
-
-      数値は自分で設定する評価値です。公式性能値ではありません。
+      0〜100で自由に設定できます。
 
     </p>
 
     <div id="stats"></div>
 
+    <div id="saved" class="note">この端末に自動保存されます。</div>
+
     <div class="actions">
 
-      <button onclick="saveStats('${name}')">保存</button>
+      <button onclick="resetStats()">評価をリセット</button>
 
-      <button onclick="resetStats('${name}')">初期化</button>
+      <button class="close" onclick="closeModal()">閉じる</button>
 
     </div>
 
-    <p id="saved" class="small"></p>
+  </div>
+
+</div>
+
+<script>
+
+const beys = [
+
+  {name:"ウィザードロッド",image:"images/wizard-rod.png"},
+
+  {name:"ナイトランス",image:"images/knight-lance.png"},
+
+  {name:"ヘルズサイズ",image:"images/hells-scythe.png"},
+
+  {name:"ヘルズネザー",image:"images/hells-nether.png"},
+
+  {name:"シルバーウルフ",image:"images/silver-wolf.png"},
+
+  {name:"グローリーワルキューレ",image:"images/glory-valkyrie.png"},
+
+  {name:"メテオドラグーン",image:"images/meteor-dragoon.png"},
+
+  {name:"エアロペガサス",image:"images/aero-pegasus.png"},
+
+  {name:"ワイバーンホバーン",image:"images/wyvern-hover.png"},
+
+  {name:"ブラキオウィップ",image:"images/brachio-whip.png"},
+
+  {name:"ストームペガシス",image:"images/storm-pegasis.png"},
+
+  {name:"バレットグリフォン",image:"images/bullet-gryphon.png"},
+
+  {name:"ババムートブリッツ",image:"images/bahamut-blitz.png"}
+
+];
+
+const statNames = [
+
+  ["attack","攻撃"],
+
+  ["defense","防御"],
+
+  ["stamina","持久"],
+
+  ["balance","バランス"]
+
+];
+
+let selected = null;
+
+function getStats(name) {
+
+  const all = JSON.parse(localStorage.getItem("bx_stats") || "{}");
+
+  return all[name] || {
+
+    attack:50, defense:50, stamina:50, balance:50
+
+  };
+
+}
+
+function saveStat(name,key,value) {
+
+  const all = JSON.parse(localStorage.getItem("bx_stats") || "{}");
+
+  if (!all[name]) all[name] = getStats(name);
+
+  all[name][key] = Math.max(0,Math.min(100,Number(value)||0));
+
+  localStorage.setItem("bx_stats",JSON.stringify(all));
+
+  document.getElementById("saved").textContent =
+
+    "保存しました！この端末に記録されています。";
+
+  updateStatDisplay();
+
+}
+
+function imageHTML(bey,detail=false) {
+
+  const className = detail ? "detail-image" : "card-image";
+
+  const placeholderClass = detail ? "detail-placeholder" : "placeholder";
+
+  return `
+
+    <img class="${className}"
+
+      src="${bey.image}"
+
+      alt="${bey.name}"
+
+      onerror="this.outerHTML='<div class=\\'${placeholderClass}\\'>画像準備中</div>'">
 
   `;
 
-  detail.querySelector("h2").textContent=b.name;
+}
 
-  const area=detail.querySelector("#stats");
+function render() {
 
-  statNames.forEach(stat => {
+  const word = document.getElementById("search").value.trim();
 
-    const value=Math.max(0,Math.min(100,Number(stats[stat])||0));
+  const filter = document.getElementById("filter").value;
 
-    const box=document.createElement("div");
+  const sort = document.getElementById("sort").value;
 
-    box.className="stat";
+  let list = beys.filter(b => b.name.includes(word));
 
-    box.innerHTML=`
+  if (filter === "missing") {
 
-      <div class="stat-title">
+    list = list.filter(b => !hasImage(b));
 
-        <b></b>
+  }
 
-        <input type="number" min="0" max="100" value="${value}">
+  if (filter === "ready") {
 
-      </div>
+    list = list.filter(b => hasImage(b));
 
-      <input type="range" min="0" max="100" value="${value}">
+  }
+
+  if (sort === "name") {
+
+    list.sort((a,b) => a.name.localeCompare(b.name,"ja"));
+
+  }
+
+  document.getElementById("count").textContent =
+
+    `${list.length}種類 登録中`;
+
+  document.getElementById("grid").innerHTML = list.map(b => {
+
+    const s = getStats(b.name);
+
+    return `
+
+      <article class="bey" onclick="showDetail('${b.name}')">
+
+        ${imageHTML(b)}
+
+        <h3>${b.name}</h3>
+
+        <div class="small-stats">
+
+          攻撃 ${s.attack} ・ 防御 ${s.defense}<br>
+
+          持久 ${s.stamina} ・ バランス ${s.balance}
+
+        </div>
+
+      </article>
 
     `;
 
-    box.querySelector("b").textContent=stat;
-
-    const number=box.querySelector('input[type="number"]');
-
-    const range=box.querySelector('input[type="range"]');
-
-    number.oninput=()=>{
-
-      const v=Math.max(0,Math.min(100,Number(number.value)||0));
-
-      range.value=v;
-
-    };
-
-    range.oninput=()=>{
-
-      number.value=range.value;
-
-    };
-
-    area.appendChild(box);
-
-  });
-
-  document.getElementById("modal").style.display="flex";
+  }).join("");
 
 }
 
-function saveStats(name) {
+function hasImage(bey) {
 
-  const values={};
+  // GitHubに画像を追加した後、実際の表示で確認できます。
 
-  const boxes=document.querySelectorAll("#stats .stat");
+  // 画像ファイルがまだない場合は読み込み失敗時に準備中になります。
 
-  boxes.forEach((box,i)=>{
-
-    const number=box.querySelector('input[type="number"]');
-
-    const value=Math.max(0,Math.min(100,Number(number.value)||0));
-
-    values[statNames[i]]=value;
-
-  });
-
-  localStorage.setItem("stats_"+name,JSON.stringify(values));
-
-  document.getElementById("saved").textContent="💾 保存しました！";
+  return false;
 
 }
 
-function resetStats(name) {
+function showDetail(name) {
 
-  const values={攻撃力:50,防御力:50,持久力:50,バランス:50};
+  selected = beys.find(b => b.name === name);
 
-  localStorage.setItem("stats_"+name,JSON.stringify(values));
+  if (!selected) return;
 
-  showDetail(name);
+  document.getElementById("detailName").textContent = name;
 
-  document.getElementById("saved").textContent="初期値に戻しました！";
+  document.getElementById("detailPhoto").innerHTML =
+
+    imageHTML(selected,true);
+
+  document.getElementById("modal").style.display = "block";
+
+  document.getElementById("saved").textContent =
+
+    "この端末に自動保存されます。";
+
+  updateStatDisplay();
+
+}
+
+function updateStatDisplay() {
+
+  if (!selected) return;
+
+  const s = getStats(selected.name);
+
+  document.getElementById("stats").innerHTML =
+
+    statNames.map(([key,label]) => `
+
+      <div class="stat">
+
+        <div class="stat-top">
+
+          <strong>${label}</strong>
+
+          <input type="number" min="0" max="100"
+
+            value="${s[key]}"
+
+            onchange="saveStat('${selected.name}','${key}',this.value)">
+
+        </div>
+
+        <input type="range" min="0" max="100"
+
+          value="${s[key]}"
+
+          oninput="saveStat('${selected.name}','${key}',this.value)">
+
+      </div>
+
+    `).join("");
+
+}
+
+function resetStats() {
+
+  if (!selected) return;
+
+  const all = JSON.parse(localStorage.getItem("bx_stats") || "{}");
+
+  all[selected.name] = {
+
+    attack:50, defense:50, stamina:50, balance:50
+
+  };
+
+  localStorage.setItem("bx_stats",JSON.stringify(all));
+
+  updateStatDisplay();
+
+  render();
+
+  document.getElementById("saved").textContent =
+
+    "初期値に戻しました。";
 
 }
 
 function closeModal() {
 
-  document.getElementById("modal").style.display="none";
+  document.getElementById("modal").style.display = "none";
+
+  selected = null;
 
 }
 
-function closeOutside(e) {
+function backgroundClose(event) {
 
-  if(e.target.id==="modal") closeModal();
+  if (event.target.id === "modal") closeModal();
 
 }
+
+function setTheme(color) {
+
+  document.documentElement.style.setProperty("--main",color);
+
+  localStorage.setItem("bx_theme",color);
+
+}
+
+const savedTheme = localStorage.getItem("bx_theme");
+
+if (savedTheme) setTheme(savedTheme);
 
 render();
 
