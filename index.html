@@ -1,316 +1,589 @@
 <!DOCTYPE html>
+
 <html lang="ja">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>BEYBLADE X ZUKAN</title>
+
 <style>
+
 :root {
+
   --bg:#111318;
+
   --panel:#20232b;
+
   --accent:#ef4444;
+
   --text:#fff;
+
   --muted:#a5a9b3;
+
 }
+
 * {box-sizing:border-box}
+
 body {
+
   margin:0;
+
   background:var(--bg);
+
   color:var(--text);
+
   font-family:Arial,sans-serif;
+
 }
+
 header {
+
   padding:28px 16px;
+
   text-align:center;
+
   background:linear-gradient(135deg,#303541,#111318);
+
 }
+
 h1 {font-size:30px;letter-spacing:3px;margin:5px}
+
 header p {color:var(--muted)}
+
 main {max-width:1100px;margin:auto;padding:18px}
+
 input,select,button {
+
   padding:12px;
+
   border:0;
+
   border-radius:10px;
+
   font-size:15px;
+
 }
+
 input,select {
+
   background:var(--panel);
+
   color:white;
+
 }
+
 button {
+
   background:var(--accent);
+
   color:white;
+
   cursor:pointer;
+
 }
+
 .search {width:100%;margin:10px 0}
+
 .controls {
+
   display:flex;
+
   gap:10px;
+
   flex-wrap:wrap;
+
   margin:12px 0;
+
 }
+
 .controls select {flex:1;min-width:130px}
+
 .themes {
+
   display:flex;
+
   justify-content:center;
+
   gap:10px;
+
   margin-top:18px;
+
 }
+
 .theme {
+
   width:30px;
+
   height:30px;
+
   padding:0;
+
   border-radius:50%;
+
   border:2px solid white;
+
 }
+
 #count {color:var(--muted);margin:18px 0}
+
 .grid {
+
   display:grid;
+
   grid-template-columns:repeat(auto-fill,minmax(145px,1fr));
+
   gap:14px;
+
 }
+
 .card {
+
   background:var(--panel);
+
   border:1px solid #414550;
+
   border-radius:14px;
+
   overflow:hidden;
+
   cursor:pointer;
+
 }
+
 .card:active {transform:scale(.97)}
+
 .photo {
+
   height:145px;
+
   background:#30343e;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   text-align:center;
+
   color:var(--muted);
+
   padding:10px;
+
   font-size:13px;
+
 }
+
 .photo img {
+
   width:100%;
+
   height:100%;
+
   object-fit:contain;
+
 }
+
 .info {padding:12px}
+
 .info h3 {font-size:15px;margin:0 0 8px}
+
 .tag {color:var(--accent);font-size:12px}
+
 .modal {
+
   position:fixed;
+
   inset:0;
+
   background:#000c;
+
   display:none;
+
   justify-content:center;
+
   align-items:center;
+
   padding:14px;
+
   z-index:10;
+
 }
+
 .modal-content {
+
   background:var(--panel);
+
   padding:20px;
+
   border-radius:18px;
+
   width:100%;
+
   max-width:460px;
+
   max-height:90vh;
+
   overflow:auto;
+
 }
+
 .modal-content .photo {
+
   height:190px;
+
   border-radius:12px;
+
 }
+
 .detail-row {
+
   padding:10px 0;
+
   border-bottom:1px solid #444;
+
 }
+
 .stat {margin:17px 0}
+
 .stat-title {
+
   display:flex;
+
   justify-content:space-between;
+
   margin-bottom:8px;
+
 }
+
 .stat input[type=number] {
+
   width:75px;
+
   text-align:center;
+
   padding:8px;
+
 }
+
 .stat input[type=range] {
+
   width:100%;
+
   accent-color:var(--accent);
+
   padding:0;
+
 }
+
 .actions {
+
   display:flex;
+
   gap:8px;
+
   margin-top:15px;
+
 }
+
 .actions button {flex:1}
+
 .close {width:100%;margin-top:12px}
+
 .small {
+
   color:var(--muted);
+
   font-size:12px;
+
   line-height:1.6;
+
 }
+
 footer {
+
   text-align:center;
+
   padding:30px;
+
   color:var(--muted);
+
   font-size:12px;
+
 }
+
 </style>
+
 </head>
+
 <body>
 
 <header>
+
   <h1>BEYBLADE X</h1>
+
   <h2>ZUKAN</h2>
+
   <p>THE ULTIMATE BEYBLADE DATABASE</p>
 
   <div class="themes">
+
     <button class="theme" style="background:#ef4444"
+
       onclick="setTheme('#ef4444')"></button>
+
     <button class="theme" style="background:#38bdf8"
+
       onclick="setTheme('#38bdf8')"></button>
+
     <button class="theme" style="background:#eabf45"
+
       onclick="setTheme('#eabf45')"></button>
+
     <button class="theme" style="background:#c084fc"
+
       onclick="setTheme('#c084fc')"></button>
+
     <button class="theme" style="background:#4ade80"
+
       onclick="setTheme('#4ade80')"></button>
+
   </div>
+
   <p class="small">カラーをタッチして変更！</p>
+
 </header>
 
 <main>
+
   <input id="search" class="search"
+
     placeholder="🔍 ベイの名前を検索..."
+
     oninput="render()">
 
   <div class="controls">
+
     <select id="type" onchange="render()">
+
       <option value="all">すべてのタイプ</option>
+
       <option value="未確認">タイプ未確認</option>
+
     </select>
+
     <select id="sort" onchange="render()">
+
       <option value="default">通常順</option>
+
       <option value="name">名前順</option>
+
     </select>
+
   </div>
 
   <div id="count"></div>
+
   <div id="grid" class="grid"></div>
+
 </main>
 
 <div class="modal" id="modal"
+
   onclick="closeOutside(event)">
+
   <div class="modal-content">
+
     <div id="detail"></div>
+
     <button class="close" onclick="closeModal()">閉じる</button>
+
   </div>
+
 </div>
 
 <footer>
+
   BEYBLADE X ZUKAN<br>
+
   Fan-made database
+
 </footer>
 
 <script>
+
 const bays = [
+
   "ウィザードロッド",
+
   "ナイトランス",
+
   "ヘルズサイズ",
+
   "ヘルズネザー",
+
   "シルバーウルフ",
+
   "グローリーワルキューレ",
+
   "メテオドラグーン",
+
   "エアロペガサス",
+
   "ワイバーンホバーン",
+
   "ブラキオウィップ",
+
   "ストームペガシス",
+
   "バレットグリフォン",
+
   "ババムートブリッツ"
+
 ].map(name => ({
+
   name,
+
   type:"未確認",
+
   parts:"未登録",
+
   rarity:"未設定"
+
 }));
 
 const statNames = ["攻撃力","防御力","持久力","バランス"];
 
 function getStats(name) {
+
   try {
+
     return JSON.parse(localStorage.getItem("stats_"+name)) ||
+
       {攻撃力:50,防御力:50,持久力:50,バランス:50};
+
   } catch(e) {
+
     return {攻撃力:50,防御力:50,持久力:50,バランス:50};
+
   }
+
 }
 
 function setTheme(color) {
+
   document.documentElement.style.setProperty("--accent",color);
+
   localStorage.setItem("beyTheme",color);
+
 }
 
 const savedTheme=localStorage.getItem("beyTheme");
+
 if(savedTheme) setTheme(savedTheme);
 
 function render() {
+
   const query=document.getElementById("search").value.toLowerCase();
+
   const type=document.getElementById("type").value;
 
   let list=bays.filter(b =>
+
     b.name.toLowerCase().includes(query) &&
+
     (type==="all" || b.type===type)
+
   );
 
   if(document.getElementById("sort").value==="name") {
+
     list.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
+
   }
 
   document.getElementById("count").textContent=
+
     "登録ベイ："+list.length+"種類";
 
   document.getElementById("grid").innerHTML="";
 
   list.forEach(b => {
+
     const card=document.createElement("div");
+
     card.className="card";
+
     card.innerHTML=`
+
       <div class="photo">公式画像準備中</div>
+
       <div class="info">
+
         <h3></h3>
+
         <span class="tag"></span>
+
       </div>
+
     `;
+
     card.querySelector("h3").textContent=b.name;
+
     card.querySelector(".tag").textContent=b.type;
+
     card.onclick=()=>showDetail(b.name);
+
     document.getElementById("grid").appendChild(card);
+
   });
+
 }
 
 function showDetail(name) {
+
   const b=bays.find(x=>x.name===name);
+
   const stats=getStats(name);
 
   const detail=document.getElementById("detail");
+
   detail.innerHTML=`
+
     <div class="photo">公式画像準備中</div>
+
     <h2></h2>
+
     <div class="detail-row">タイプ：未確認</div>
+
     <div class="detail-row">パーツ構成：未登録</div>
+
     <div class="detail-row">レア度：未設定</div>
+
     <p><b>MY STATUS</b></p>
+
     <p class="small">
+
       数値は自分で設定する評価値です。公式性能値ではありません。
+
     </p>
+
     <div id="stats"></div>
+
     <div class="actions">
+
       <button onclick="saveStats('${name}')">保存</button>
+
       <button onclick="resetStats('${name}')">初期化</button>
+
     </div>
+
     <p id="saved" class="small"></p>
+
   `;
 
   detail.querySelector("h2").textContent=b.name;
@@ -318,68 +591,105 @@ function showDetail(name) {
   const area=detail.querySelector("#stats");
 
   statNames.forEach(stat => {
+
     const value=Math.max(0,Math.min(100,Number(stats[stat])||0));
+
     const box=document.createElement("div");
+
     box.className="stat";
+
     box.innerHTML=`
+
       <div class="stat-title">
+
         <b></b>
+
         <input type="number" min="0" max="100" value="${value}">
+
       </div>
+
       <input type="range" min="0" max="100" value="${value}">
+
     `;
 
     box.querySelector("b").textContent=stat;
 
     const number=box.querySelector('input[type="number"]');
+
     const range=box.querySelector('input[type="range"]');
 
     number.oninput=()=>{
+
       const v=Math.max(0,Math.min(100,Number(number.value)||0));
+
       range.value=v;
+
     };
+
     range.oninput=()=>{
+
       number.value=range.value;
+
     };
 
     area.appendChild(box);
+
   });
 
   document.getElementById("modal").style.display="flex";
+
 }
 
 function saveStats(name) {
+
   const values={};
+
   const boxes=document.querySelectorAll("#stats .stat");
 
   boxes.forEach((box,i)=>{
+
     const number=box.querySelector('input[type="number"]');
+
     const value=Math.max(0,Math.min(100,Number(number.value)||0));
+
     values[statNames[i]]=value;
+
   });
 
   localStorage.setItem("stats_"+name,JSON.stringify(values));
+
   document.getElementById("saved").textContent="💾 保存しました！";
+
 }
 
 function resetStats(name) {
+
   const values={攻撃力:50,防御力:50,持久力:50,バランス:50};
+
   localStorage.setItem("stats_"+name,JSON.stringify(values));
+
   showDetail(name);
+
   document.getElementById("saved").textContent="初期値に戻しました！";
+
 }
 
 function closeModal() {
+
   document.getElementById("modal").style.display="none";
+
 }
 
 function closeOutside(e) {
+
   if(e.target.id==="modal") closeModal();
+
 }
 
 render();
+
 </script>
+
 </body>
+
 </html>
-
-
